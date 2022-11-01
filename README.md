@@ -13,7 +13,10 @@
   ✓ a project has a path method<br/>
   ✓ a project belongs to owner<br/>
   ✓ a project can add a task<br/>
-
+  
+  - Tests\Unit\TaskTest
+  ✓ a task belongs to a project
+  
   - Tests\Unit\UserTest<br/>
   ✓ a user has projects<br/>
 
@@ -31,10 +34,11 @@
   - Tests\Feature\ProjectTasksTest<br/>
   ✓ a project can have tasks<br/>
   ✓ only the owner of the project can add tasks<br/>
+  ✓ only the owner of the project can update tasksbr/>
   ✓ a task can be updated<br/>
   ✓ a task requires a body<br/>
 
-  Tests:  17 passed
+  Tests:  19 passed
   
 ## License
 
