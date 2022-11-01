@@ -15,8 +15,15 @@ class Task extends Model
         'project_id',
     ];
 
+    protected $touches = ['project'];
+
     public function updatePath()
     {
         return route('update.projectTask' ,['project' => $this->project_id, 'task' => $this->id]);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
 }

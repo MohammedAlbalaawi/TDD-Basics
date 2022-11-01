@@ -13,7 +13,9 @@ class Project extends Model
         'title',
         'description',
         'owner_id',
+        'notes'
     ];
+
 
     public function storePath()
     {
@@ -32,7 +34,7 @@ class Project extends Model
 
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class)->latest();
     }
 
     public function addTask($body)

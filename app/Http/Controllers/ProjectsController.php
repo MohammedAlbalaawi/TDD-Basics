@@ -37,12 +37,12 @@ class ProjectsController extends Controller
             'title' => 'required',
             'description' => 'required',
         ]);
-
+        $attributes['notes'] = request()->notes;
 //        $attributes['owner_id'] = auth()->id();
 
-        auth()->user()->projects()->create($attributes);
+        $project = auth()->user()->projects()->create($attributes);
 
 
-        return redirect('projects');
+        return redirect()->route('show.projects',$project->id);
     }
 }

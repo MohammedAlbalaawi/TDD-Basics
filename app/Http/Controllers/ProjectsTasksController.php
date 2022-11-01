@@ -10,12 +10,16 @@ class ProjectsTasksController extends Controller
 {
     public function update(Project $project,Task $task)
     {
+        if (auth()->user()->isNot($task->project->owner)) {
+            abort(403);
+        }
+
         $task->update([
             'body' => request('body'),
             'completed' => request()->has('completed'),
         ]);
 
-        return redirect($project->path());
+        return redirect()->to($project->path());
     }
 
     public function store(Project $project)

@@ -14,38 +14,48 @@
 
                     @foreach($project->tasks as $task)
                         <div>
-                            <form action="{{$project->path() . '/tasks/' . $task->id}}" method="POST">
+                            <form action="{{$task->updatePath()}}" method="POST">
                                 @csrf
-                                @method('PATCH')
+                                @method('put')
 
-                                <div class="d-flex form-control p-4 rounded-4 shadow-sm border mb-2" style="background-color: #fff;">
-                                    <input name="body" type="text" class="w-100 form-control shadow-sm border p-2 me-1"  value="{{$task->body}}" />
+                                <div class="d-flex form-control p-4 rounded-4 shadow-sm border mb-2"
+                                     style="background-color: #fff;">
+                                    <input name="body"
+                                           type="text"
+                                           class="w-100 form-control shadow-sm border p-2 me-1 {{ $task->completed ? 'text-decoration-line-through' : '' }}"
+                                           value="{{$task->body}}"/>
                                     <input name="completed"
                                            type="checkbox"
                                            style="width: 20px;"
                                            onchange="this.form.submit()"
-                                           {{ $task->completed ? 'checked' : '' }}
+                                        {{ $task->completed ? 'checked' : '' }}
                                     />
                                 </div>
                             </form>
                         </div>
                     @endforeach
 
-                    <div class="p-4 rounded-4 shadow-sm border mb-2" style="background-color: #fff;">
+                    <div class="p-4 rounded-4  mb-2" style="background-color: #fff;">
                         <form method="POST" action="{{$project->storePath()}}">
                             @csrf
                             <input type="text"
                                    name="body"
                                    placeholder="Add new task.."
-                                   class="w-100 form-control shadow-none rounded-3 p-2"/>
+                                   class="w-100 form-control shadow-none border rounded-3 p-2"/>
                         </form>
                     </div>
                 </div>
                 <div>
                     <h2>Notes</h2>
-                    <div class="p-4 rounded-4 shadow-sm border" style="min-height: 200px; background-color: #fff;">
-                        Loerm...
-                    </div>
+                 <form method="post" action="{{$project->updateProjectPath}}">
+                     @csrf
+                     @method('put')
+
+                     <textarea class="w-100 form-control border shadow-none p-4 mb-1"
+                               style="height: 200px; background-color: #fff; resize: none;"
+                               placeholder="Any notes to remember ?">{{$project->notes}}</textarea>
+                     <button type="submit" class="btn btn-primary">Save</button>
+                 </form>
 
                 </div>
             </div>

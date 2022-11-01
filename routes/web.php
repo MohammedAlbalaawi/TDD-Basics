@@ -17,14 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('index.projects');
 });
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/projects', [ProjectsController::class, 'index']);
-    Route::get('/projects/create', [ProjectsController::class, 'create']);
+    Route::get('/projects', [ProjectsController::class, 'index'])->name('index.projects');
+    Route::get('/projects/create', [ProjectsController::class, 'create'])->name('create.projects');
     Route::get('/projects/{project}', [ProjectsController::class, 'show'])->name('show.projects');
-    Route::post('projects', [ProjectsController::class, 'store']);
+    Route::post('projects', [ProjectsController::class, 'store'])->name('store.projects');
 
     Route::post('/projects/{project}/tasks', [ProjectsTasksController::class, 'store'])->name('store.projectTask');
     Route::put('/projects/{project}/tasks/{task}', [ProjectsTasksController::class, 'update'])->name('update.projectTask');
