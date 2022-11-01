@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\ProjectsTasksController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['middleware' => 'auth'], function () {
+
     Route::get('/projects', [ProjectsController::class, 'index']);
-    Route::get('/projects/{project}', [ProjectsController::class, 'show']);
+    Route::get('/projects/create', [ProjectsController::class, 'create']);
+    Route::get('/projects/{project}', [ProjectsController::class, 'show'])->name('show.projects');
     Route::post('projects', [ProjectsController::class, 'store']);
+
+    Route::post('/projects/{project}/tasks', [ProjectsTasksController::class, 'store'])->name('store.projectTask');
+    Route::put('/projects/{project}/tasks/{task}', [ProjectsTasksController::class, 'update'])->name('update.projectTask');
 });
 
 

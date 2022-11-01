@@ -16,12 +16,24 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $this->assertEquals('projects/' . $project->id, $project->path());
+//        dd($project->path());
+        $this->assertEquals('http://localhost/projects/' . $project->id, $project->path());
     }
 
     public function test_a_project_belongs_to_owner()
     {
         $project = Project::factory()->create();
         $this->assertInstanceOf(User::class, $project->owner);
+    }
+
+    public function test_a_project_can_add_a_task()
+    {
+        $this->withoutExceptionHandling();
+
+        $project = Project::factory()->create();
+        $task = $project->addTask('Task Body');
+
+        $this->assertcount(1, $project->tasks);
+        $this->assertTrue($project->tasks->contains($task));
     }
 }

@@ -8,15 +8,19 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ProjectsTest extends TestCase
+class ManageProjectsTest extends TestCase
 {
     use RefreshDatabase;
     use withFaker;
 
     public function test_an_authenticated_user_can_create_a_project()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $this->withoutExceptionHandling();
+
+//        $user = User::factory()->create();
+//        $this->actingAs($user);
+        $this->signIn();
+
 
         $attributes = [
             'title' => $this->faker->sentence,
@@ -34,8 +38,7 @@ class ProjectsTest extends TestCase
 
     public function test_an_authenticated_user_can_view_their_projects()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $this->signIn();
 
         $project = Project::factory()->create(['owner_id' => auth()->id()]);
 
@@ -46,8 +49,7 @@ class ProjectsTest extends TestCase
 
     public function test_an_authenticated_user_cant_view_others_projects()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $this->signIn();
 
         $project = Project::factory()->create();
 
@@ -57,8 +59,7 @@ class ProjectsTest extends TestCase
 
     public function test_a_project_requires_a_title()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $this->signIn();
 
         $attributes = Project::factory()->raw(['title' => '']);
 
@@ -68,13 +69,18 @@ class ProjectsTest extends TestCase
 
     public function test_a_project_requires_a_description()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $this->signIn();
 
         $attributes = Project::factory()->raw(['description' => '']);
 
         $this->post('/projects',$attributes)
             ->assertSessionHasErrors('description');
+    }
+
+    public function test_guests_cant_view_create_page()
+    {
+        $this->get('/projects/create')
+            ->assertRedirect('login');
     }
 
     public function test_guests_cant_create_projects()
