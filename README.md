@@ -14,7 +14,7 @@
   ✓ a project belongs to owner<br/>
   ✓ a project can add a task<br/>
 
-   PASS  Tests\Unit\UserTest<br/>
+  - Tests\Unit\UserTest<br/>
   ✓ a user has projects<br/>
 
   - Tests\Feature\ManageProjectsTest<br/>
