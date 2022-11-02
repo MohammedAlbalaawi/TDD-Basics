@@ -1,4 +1,4 @@
-<a href="{{$project->path()}}" style="text-decoration: none;">
+<a href="{{$project->showProjectPath()}}" style="text-decoration: none;">
     <h3 class="border-start border-4 border-info ps-3 h-25 d-flex align-items-center">{{$project->title}}</h3>
 </a>
 

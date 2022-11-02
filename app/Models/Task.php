@@ -17,7 +17,7 @@ class Task extends Model
 
     protected $touches = ['project'];
 
-    public function updatePath()
+    public function updateTaskPath()
     {
         return route('update.projectTask' ,['project' => $this->project_id, 'task' => $this->id]);
     }

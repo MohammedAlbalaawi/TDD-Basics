@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex align-items-center justify-content-between ">
-        <h1>Projects</h1>
+        <h1>My Projects</h1>
         <a href="/projects/create" class="btn btn-primary">New project</a>
     </div>
 

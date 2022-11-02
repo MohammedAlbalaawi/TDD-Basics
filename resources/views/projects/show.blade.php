@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex align-items-center justify-content-between text-decoration-none text-secondary">
         <p><a href="/projects" class="text-decoration-none text-secondary">Project Tasks</a> / {{$project->title}}</p>
-        <a href="/projects/create" class="btn btn-primary">New Task</a>
+        <a href="{{route('ViewEdit.projects',$project->id)}}" class="btn btn-primary">Edit Project Info.</a>
     </div>
 
     <main>
@@ -14,7 +14,7 @@
 
                     @foreach($project->tasks as $task)
                         <div>
-                            <form action="{{$task->updatePath()}}" method="POST">
+                            <form action="{{$task->updateTaskPath()}}" method="POST">
                                 @csrf
                                 @method('put')
 
@@ -22,7 +22,7 @@
                                      style="background-color: #fff;">
                                     <input name="body"
                                            type="text"
-                                           class="w-100 form-control shadow-sm border p-2 me-1 {{ $task->completed ? 'text-decoration-line-through' : '' }}"
+                                           class="w-100 form-control shadow-sm border p-2 me-2 {{ $task->completed ? 'text-decoration-line-through' : '' }}"
                                            value="{{$task->body}}"/>
                                     <input name="completed"
                                            type="checkbox"
@@ -36,22 +36,22 @@
                     @endforeach
 
                     <div class="p-4 rounded-4  mb-2" style="background-color: #fff;">
-                        <form method="POST" action="{{$project->storePath()}}">
+                        <form method="POST" action="{{$project->storeProjectTaskPath()}}">
                             @csrf
                             <input type="text"
                                    name="body"
-                                   placeholder="Add new task.."
+                                   placeholder="Add new task.. ENTER to submit"
                                    class="w-100 form-control shadow-none border rounded-3 p-2"/>
                         </form>
                     </div>
                 </div>
                 <div>
                     <h2>Notes</h2>
-                 <form method="post" action="{{$project->updateProjectPath}}">
+                 <form method="post" action="{{$project->updateProjectPath()}}">
                      @csrf
                      @method('put')
 
-                     <textarea class="w-100 form-control border shadow-none p-4 mb-1"
+                     <textarea name="notes" class="w-100 form-control border shadow-none p-4 mb-1"
                                style="height: 200px; background-color: #fff; resize: none;"
                                placeholder="Any notes to remember ?">{{$project->notes}}</textarea>
                      <button type="submit" class="btn btn-primary">Save</button>

@@ -17,12 +17,23 @@ class Project extends Model
     ];
 
 
-    public function storePath()
+    public function ViewEditProjectPagePath()
+    {
+        return route('ViewEdit.projects' ,['project' => $this->id]);
+    }
+
+
+    public function updateProjectPath()
+    {
+        return route('update.projects' ,['project' => $this->id]);
+    }
+
+    public function storeProjectTaskPath()
     {
         return route('store.projectTask' ,['project' => $this->id]);
     }
 
-    public function path()
+    public function showProjectPath()
     {
         return route('show.projects' , ['project' => $this->id]);
     }

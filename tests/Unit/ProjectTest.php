@@ -16,8 +16,8 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->create();
 
-//        dd($project->path());
-        $this->assertEquals('http://localhost/projects/' . $project->id, $project->path());
+//        dd($project->showProjectPath());
+        $this->assertEquals('http://localhost/projects/' . $project->id, $project->showProjectPath());
     }
 
     public function test_a_project_belongs_to_owner()

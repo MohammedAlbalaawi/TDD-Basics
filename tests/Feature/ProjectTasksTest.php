@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tests\Setup\ProjectFactory;
 use Tests\TestCase;
 
 class ProjectTasksTest extends TestCase
@@ -14,11 +15,12 @@ class ProjectTasksTest extends TestCase
 
     public function test_a_project_can_have_tasks()
     {
+
         $this->signIn();
         $project = Project::factory()->create(['owner_id' => auth()->id()]);
 
-        $this->post($project->path() . '/tasks', ['body' => 'Task Body']);
-        $this->get($project->path())
+        $this->post($project->showProjectPath() . '/tasks', ['body' => 'Task Body']);
+        $this->get($project->showProjectPath())
             ->assertSee('Task Body');
     }
 
@@ -27,7 +29,7 @@ class ProjectTasksTest extends TestCase
         $this->signIn();
         $project = Project::factory()->create();
 
-        $this->post($project->storePath(), ['body' => 'Task Body'])
+        $this->post($project->storeProjectTaskPath(), ['body' => 'Task Body'])
             ->assertStatus(403);
 
         $this->assertDatabaseMissing('tasks', ['body' => 'Task Body']);
@@ -35,13 +37,16 @@ class ProjectTasksTest extends TestCase
 
     public function test_only_the_owner_of_the_project_can_update_tasks()
     {
+
+//        $project = app(ProjectFactory::class)->withTasks(1)->create();
+
         $this->signIn();
 
         $project = Project::factory()->create();
 
         $taskModel = $project->addTask('test task');
 
-        $this->put($taskModel->updatePath(), [
+        $this->put($taskModel->updateTaskPath(), [
             'body' => 'changed',
             'completed' => true
         ])->assertStatus(403);
@@ -61,7 +66,7 @@ class ProjectTasksTest extends TestCase
 
         $taskModel = $project->addTask('test task');
 
-        $this->put($taskModel->updatePath(), [
+        $this->put($taskModel->updateTaskPath(), [
             'body' => 'changed',
             'completed' => true
         ]);
@@ -81,7 +86,7 @@ class ProjectTasksTest extends TestCase
 
         $attributes = Task::factory()->raw(['body' => '']);
 
-        $this->post($project->path() . '/tasks', $attributes)
+        $this->post($project->showProjectPath() . '/tasks', $attributes)
             ->assertSessionHasErrors('body');
     }
 
