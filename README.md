@@ -9,36 +9,39 @@
 
 ## Tests
 
-  - Tests\Unit\ProjectTest<br/>
+  - Tests\Unit\ProjectTest
   ✓ a project has a path method<br/>
   ✓ a project belongs to owner<br/>
   ✓ a project can add a task<br/>
-  
+
   - Tests\Unit\TaskTest
-  ✓ a task belongs to a project
-  
-  - Tests\Unit\UserTest<br/>
+  ✓ a task belongs to a project<br/>
+
+   PASS  Tests\Unit\UserTest
   ✓ a user has projects<br/>
 
-  - Tests\Feature\ManageProjectsTest<br/>
+  - Tests\Feature\ManageProjectsTest
   ✓ an authenticated user can create a project<br/>
   ✓ an authenticated user can view their projects<br/>
+  ✓ an authenticated user can update their projects<br/>
   ✓ an authenticated user cant view others projects<br/>
+  ✓ an authenticated user cant update others projects<br/>
   ✓ a project requires a title<br/>
   ✓ a project requires a description<br/>
   ✓ guests cant view create page<br/>
   ✓ guests cant create projects<br/>
   ✓ guests cant view projects<br/>
   ✓ guests cant view a single project<br/>
+  ✓ guests cant view edit project page<br/>
 
-  - Tests\Feature\ProjectTasksTest<br/>
+  - Tests\Feature\ProjectTasksTest
   ✓ a project can have tasks<br/>
   ✓ only the owner of the project can add tasks<br/>
-  ✓ only the owner of the project can update tasksbr/>
+  ✓ only the owner of the project can update tasks<br/>
   ✓ a task can be updated<br/>
   ✓ a task requires a body<br/>
 
-  Tests:  19 passed
+  Tests:  22 passed
   
 ## License
 
