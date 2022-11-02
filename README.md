@@ -10,17 +10,21 @@
 ## Tests
 
   - Tests\Unit\ProjectTest
+  - 
   ✓ a project has a path method<br/>
   ✓ a project belongs to owner<br/>
   ✓ a project can add a task<br/>
 
   - Tests\Unit\TaskTest
+  - 
   ✓ a task belongs to a project<br/>
 
   - Tests\Unit\UserTest
+  - 
   ✓ a user has projects<br/>
 
   - Tests\Feature\ManageProjectsTest
+  - 
   ✓ an authenticated user can create a project<br/>
   ✓ an authenticated user can view their projects<br/>
   ✓ an authenticated user can update their projects<br/>
@@ -35,6 +39,7 @@
   ✓ guests cant view edit project page<br/>
 
   - Tests\Feature\ProjectTasksTest
+  - 
   ✓ a project can have tasks<br/>
   ✓ only the owner of the project can add tasks<br/>
   ✓ only the owner of the project can update tasks<br/>
