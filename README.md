@@ -17,7 +17,7 @@
   - Tests\Unit\TaskTest
   ✓ a task belongs to a project<br/>
 
-   PASS  Tests\Unit\UserTest
+  - Tests\Unit\UserTest
   ✓ a user has projects<br/>
 
   - Tests\Feature\ManageProjectsTest
