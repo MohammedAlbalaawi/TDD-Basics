@@ -57,7 +57,7 @@
   ✓ a task can be marked as incomplete<br/>
   ✓ a task requires a body<br/>
 
-  Tests:  30 passed
+  -Tests:  30 passed
   
 ## License
 
