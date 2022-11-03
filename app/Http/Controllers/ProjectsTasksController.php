@@ -15,10 +15,16 @@ class ProjectsTasksController extends Controller
 //            abort(403);
 //        }
 
-        $task->update([
-            'body' => request('body'),
-            'completed' => request()->has('completed'),
-        ]);
+        $task->update(['body' => request()->body]);
+
+        if (request('completed'))
+        {
+            $task->complete();
+
+        }else{
+
+            $task->inComplete();
+        }
 
         return redirect()->to($project->showProjectPath());
     }
